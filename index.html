@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact Investing Playbook — A Living Framework Repository</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #14141F;
+    --navy-mid: #1E1E30;
+    --navy-light: #2A2A42;
+    --copper: #C97D4F;
+    --copper-light: #E8A877;
+    --cream: #F7F5F2;
+    --slate: #4A5568;
+    --slate-light: #8A87A0;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--cream); min-height: 100vh; }
+
+  header {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201,125,79,0.2);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.04em; color: var(--cream); display: flex; align-items: center; gap: 10px; }
+
+  .logo-dot { width: 8px; height: 8px; background: var(--copper); border-radius: 50%; display: inline-block; }
+
+  .header-right { display: flex; align-items: center; gap: 1.5rem; }
+
+  .notebook-tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--copper); border: 1px solid rgba(201,125,79,0.4); padding: 3px 10px; border-radius: 2px;
+  }
+
+  .last-updated { font-size: 0.72rem; color: var(--slate-light); letter-spacing: 0.02em; }
+
+  .hero { padding: 5rem 2rem 3.5rem; max-width: 900px; margin: 0 auto; text-align: center; }
+
+  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--copper); margin-bottom: 1.5rem; font-weight: 500; }
+
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; line-height: 1.1; color: var(--cream); margin-bottom: 1.25rem; }
+
+  .hero h1 em { font-style: normal; color: var(--copper); }
+
+  .hero p { font-size: 1.05rem; line-height: 1.7; color: rgba(247,245,242,0.65); max-width: 600px; margin: 0 auto 2rem; }
+
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; }
+
+  .stat { text-align: center; }
+
+  .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--copper); display: block; }
+
+  .stat-label { font-size: 0.75rem; color: var(--slate-light); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .context-banner {
+    max-width: 900px; margin: 0 auto 2rem; padding: 1rem 1.5rem;
+    background: rgba(201,125,79,0.07); border: 1px solid rgba(201,125,79,0.25); border-radius: 4px;
+    font-size: 0.82rem; line-height: 1.6; color: rgba(247,245,242,0.75); text-align: center;
+  }
+
+  .context-banner strong { color: var(--copper-light); }
+
+  .cat-nav { display: flex; gap: 0.5rem; padding: 1.5rem 2rem; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; align-items: center; }
+
+  .cat-btn {
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 8px 18px; border: 1px solid rgba(247,245,242,0.15); border-radius: 3px; background: transparent;
+    color: rgba(247,245,242,0.55); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+
+  .cat-btn:hover { border-color: var(--copper); color: var(--copper); }
+  .cat-btn.active { background: var(--copper); border-color: var(--copper); color: var(--navy); }
+
+  .search-wrap { margin-left: auto; position: relative; }
+
+  .search-input {
+    background: rgba(247,245,242,0.06); border: 1px solid rgba(247,245,242,0.12); border-radius: 3px;
+    padding: 8px 14px 8px 36px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.82rem;
+    width: 220px; outline: none; transition: border-color 0.2s;
+  }
+
+  .search-input::placeholder { color: var(--slate-light); }
+  .search-input:focus { border-color: var(--copper); }
+
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--slate-light); font-size: 0.85rem; }
+
+  .main { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem 5rem; }
+
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; margin-top: 2.5rem; }
+
+  .section-label { font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; }
+
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--cream); }
+
+  .section-line { flex: 1; height: 1px; background: rgba(247,245,242,0.08); }
+
+  .cat-foundations .section-label { background: rgba(201,125,79,0.15); color: var(--copper); }
+  .cat-measurement .section-label { background: rgba(45,106,130,0.2); color: #5BA3C9; }
+  .cat-structuring .section-label { background: rgba(85,60,123,0.2); color: #A78BDA; }
+  .cat-portfolio .section-label { background: rgba(45,106,79,0.2); color: #52B788; }
+  .cat-duediligence .section-label { background: rgba(139,58,58,0.15); color: #E07A7A; }
+
+  .fw-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px;
+    background: rgba(247,245,242,0.06); border: 1px solid rgba(247,245,242,0.06); margin-bottom: 0.5rem;
+  }
+
+  .fw-card { background: var(--navy-mid); padding: 1.5rem; cursor: pointer; transition: background 0.2s; position: relative; overflow: hidden; }
+
+  .fw-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; opacity: 0; transition: opacity 0.2s; }
+
+  .fw-card:hover { background: var(--navy-light); }
+  .fw-card:hover::before { opacity: 1; }
+  .fw-card.open { background: var(--navy-light); }
+  .fw-card:focus-visible { outline: 2px solid var(--copper); outline-offset: -2px; }
+  .fw-card.open::before { opacity: 1; }
+
+  .cat-foundations .fw-card::before { background: var(--copper); }
+  .cat-measurement .fw-card::before { background: #5BA3C9; }
+  .cat-structuring .fw-card::before { background: #A78BDA; }
+  .cat-portfolio .fw-card::before { background: #52B788; }
+  .cat-duediligence .fw-card::before { background: #E07A7A; }
+
+  .fw-type { font-size: 0.67rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; opacity: 0.65; }
+  .start-badge { font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); background: var(--copper); padding: 2px 8px; border-radius: 2px; display: inline-block; margin-bottom: 0.6rem; margin-right: 0.5rem; }
+
+  .fw-name { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: 0.4rem; line-height: 1.3; }
+
+  .fw-short { font-size: 0.8rem; color: var(--slate-light); line-height: 1.5; margin-bottom: 1rem; }
+
+  .fw-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .tag { font-size: 0.67rem; font-weight: 500; padding: 2px 8px; border-radius: 2px; background: rgba(247,245,242,0.07); color: rgba(247,245,242,0.5); letter-spacing: 0.03em; }
+
+  .fw-arrow { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.9rem; color: var(--slate-light); transition: transform 0.2s, color 0.2s; }
+
+  .fw-card.open .fw-arrow { transform: rotate(90deg); color: var(--copper); }
+
+  .fw-detail { display: none; background: var(--navy-light); border-top: 1px solid rgba(247,245,242,0.08); padding: 2rem; grid-column: 1 / -1; }
+
+  .fw-detail.open { display: block; }
+
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+
+  @media (max-width: 700px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .fw-grid { grid-template-columns: 1fr; }
+  }
+
+  .detail-block h4 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--copper); margin-bottom: 0.75rem;
+  }
+
+  .detail-block p, .detail-block li { font-size: 0.88rem; line-height: 1.65; color: rgba(247,245,242,0.75); }
+
+  .detail-block ul, .detail-block ol { padding-left: 1.25rem; }
+
+  .detail-block li { margin-bottom: 0.3rem; }
+
+  .steps-list { counter-reset: steps; list-style: none; padding: 0; }
+
+  .steps-list li { counter-increment: steps; display: flex; gap: 0.75rem; margin-bottom: 0.6rem; align-items: flex-start; }
+
+  .steps-list li::before {
+    content: counter(steps); font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 700;
+    color: var(--navy); background: var(--copper); width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+
+  /* Five Dimensions visual */
+  .dimension-grid { display: flex; flex-direction: column; gap: 6px; margin-top: 0.5rem; }
+  .dimension-row {
+    display: flex; align-items: baseline; gap: 0.6rem; font-size: 0.8rem; padding: 6px 10px;
+    border-radius: 3px; background: rgba(247,245,242,0.04); border-left: 2px solid var(--copper);
+  }
+  .dimension-label { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--copper); min-width: 90px; flex-shrink: 0; }
+
+  .practice-section { margin-top: 1.5rem; border-top: 1px solid rgba(247,245,242,0.08); padding-top: 1.5rem; }
+
+  .practice-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+
+  .practice-badge {
+    font-size: 0.67rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(201,125,79,0.15); color: var(--copper); padding: 3px 10px; border-radius: 2px;
+  }
+
+  .practice-header h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--cream); }
+
+  .practice-scenario {
+    background: rgba(247,245,242,0.04); border: 1px solid rgba(247,245,242,0.1); border-radius: 4px;
+    padding: 1rem 1.25rem; font-size: 0.85rem; line-height: 1.65; color: rgba(247,245,242,0.8);
+    margin-bottom: 0.85rem; font-style: italic;
+  }
+
+  .practice-input {
+    width: 100%; background: rgba(247,245,242,0.05); border: 1px solid rgba(247,245,242,0.12); border-radius: 4px;
+    padding: 0.85rem 1rem; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.85rem; line-height: 1.5;
+    resize: vertical; min-height: 90px; outline: none; transition: border-color 0.2s; margin-bottom: 0.75rem;
+  }
+
+  .practice-input:focus { border-color: var(--copper); }
+  .practice-input::placeholder { color: var(--slate-light); }
+
+  .practice-btn {
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; font-weight: 600; padding: 9px 22px;
+    background: var(--copper); color: var(--navy); border: none; border-radius: 3px; cursor: pointer;
+    letter-spacing: 0.04em; transition: background 0.2s;
+  }
+
+  .practice-btn:hover { background: var(--copper-light); }
+  .practice-btn:disabled { opacity: 0.5; cursor: wait; }
+
+  .ai-response {
+    margin-top: 1rem; background: rgba(201,125,79,0.06); border: 1px solid rgba(201,125,79,0.2); border-radius: 4px;
+    padding: 1rem 1.25rem; font-size: 0.85rem; line-height: 1.7; color: rgba(247,245,242,0.85); display: none;
+  }
+
+  .ai-response.visible { display: block; }
+
+  .ai-response-label { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.6rem; }
+
+  .section-divider { height: 1px; background: rgba(247,245,242,0.05); margin: 3rem 0 0; }
+
+  footer {
+    border-top: 1px solid rgba(247,245,242,0.07); padding: 2.5rem 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--slate-light); max-width: 1200px; margin: 0 auto;
+  }
+
+  footer a { color: var(--copper); text-decoration: none; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="logo-dot"></span>Impact Investing Playbook</div>
+  <div class="header-right">
+    <span class="notebook-tag">Living Notebook</span>
+    <span class="last-updated">Last updated June 2026</span>
+  </div>
+</header>
+
+<div class="hero">
+  <p class="hero-eyebrow">A Framework Repository for Impact Investing</p>
+  <h1>Capital with <em>intention</em>,<br>measured with rigour</h1>
+  <p>From the analyst's first impact thesis to a fund manager's portfolio construction — the frameworks that structure how capital is deployed, measured, and managed for both financial and impact return.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">14</span><span class="stat-label">Frameworks</span></div>
+    <div class="stat"><span class="stat-num">5</span><span class="stat-label">Categories</span></div>
+    <div class="stat"><span class="stat-num">AI</span><span class="stat-label">Practice Mode</span></div>
+  </div>
+</div>
+
+<div class="context-banner">
+  Covers both <strong>practitioner-level</strong> concepts (impact thesis, measurement, ESG vs impact) and <strong>fund/investor-level</strong> mechanics (deal structuring, portfolio construction, due diligence) — the full picture from analyst to allocator.
+</div>
+
+<div class="context-banner" style="margin-top: 1rem; text-align: left;">
+  <strong style="color: var(--copper-light);">New to this notebook?</strong> Start with <strong>ESG vs Impact Investing</strong> (Foundations section) — it sets up the distinction every later framework assumes you already hold. Then <strong>Additionality</strong> and the <strong>Five Dimensions of Impact</strong> together give you the core measurement logic before moving into deal structuring or fund-level mechanics.
+</div>
+
+<div class="cat-nav">
+  <button class="cat-btn active" onclick="filterCat('all', this)">All Frameworks</button>
+  <button class="cat-btn" onclick="filterCat('foundations', this)">Foundations</button>
+  <button class="cat-btn" onclick="filterCat('measurement', this)">Measurement</button>
+  <button class="cat-btn" onclick="filterCat('structuring', this)">Deal Structuring</button>
+  <button class="cat-btn" onclick="filterCat('portfolio', this)">Portfolio & Fund</button>
+  <button class="cat-btn" onclick="filterCat('duediligence', this)">Due Diligence</button>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" class="search-input" placeholder="Search frameworks..." oninput="searchFrameworks(this.value)">
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ═══════════════════════════════
+       SECTION 1: FOUNDATIONS
+  ═══════════════════════════════ -->
+  <div class="section-header cat-foundations" data-cat="foundations">
+    <span class="section-label">Foundations</span>
+    <span class="section-title">Foundations of Impact Investing</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fw-grid cat-foundations" data-cat="foundations">
+
+    <!-- ESG vs Impact -->
+    <div class="fw-card" onclick="toggleCard(this, 'esgvimpact-detail')" data-name="ESG vs Impact Investing" data-tags="ESG impact distinction screening avoiding harm active impact">
+      <span class="fw-arrow">›</span>
+      <span class="start-badge">Start Here</span>
+      <div class="fw-type">Core Distinction</div>
+      <div class="fw-name">ESG vs Impact Investing</div>
+      <div class="fw-short">Avoiding harm is not the same as creating good. The spectrum every investor must place themselves on.</div>
+      <div class="fw-tags"><span class="tag">Spectrum</span><span class="tag">Intentionality</span><span class="tag">Additionality</span></div>
+    </div>
+    <div class="fw-detail" id="esgvimpact-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The capital allocation spectrum</h4>
+          <ul>
+            <li><strong>Traditional investing:</strong> Financial return only, no consideration of impact</li>
+            <li><strong>ESG integration:</strong> Considers environmental, social, governance factors as financial risk factors — primarily about risk management, not impact creation</li>
+            <li><strong>Responsible/Negative screening:</strong> Excludes harmful sectors (tobacco, weapons, fossil fuels) — avoids harm but doesn't actively create good</li>
+            <li><strong>Sustainable/Thematic investing:</strong> Actively invests in sustainability themes (clean energy, etc.) but impact may not be the primary intent</li>
+            <li><strong>Impact investing:</strong> Intentional, measurable positive social/environmental impact alongside financial return — impact is a core objective, not a side effect</li>
+            <li><strong>Philanthropy / Grants:</strong> Impact-only, no expectation of financial return</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>The three defining features of true impact investing</h4>
+          <ol class="steps-list">
+            <li><strong>Intentionality:</strong> The investor's intention to generate positive social/environmental impact through investments is essential</li>
+            <li><strong>Measurement:</strong> A commitment to measure and report the social and environmental performance of investments</li>
+            <li><strong>Additionality:</strong> The investment makes a difference beyond what would have happened anyway (without it, this outcome wouldn't occur, or wouldn't occur at this scale/speed)</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Where "impact washing" happens</h4>
+          <ul>
+            <li>Labelling ESG-integrated funds as "impact" when they only manage risk, not create outcomes</li>
+            <li>Investing in a company that's "good" but where the investment itself adds no additionality (e.g. buying public equity in an already well-funded company)</li>
+            <li>Claiming credit for impact metrics the company would have achieved regardless of the investment</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Why the distinction matters practically</h4>
+          <ul>
+            <li>Affects what metrics you track, how you structure deals, and what return expectations are appropriate</li>
+            <li>LPs (limited partners) increasingly demand clarity on where a fund sits — vague positioning damages credibility and fundraising</li>
+            <li>Different asset classes lend themselves to different points on the spectrum — private equity/venture has higher additionality potential than public equities</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A fund manager is raising capital for a new vehicle that will invest in publicly listed renewable energy companies, screening out fossil fuel holdings. They want to market it as an "impact fund." Assess where this strategy actually sits on the spectrum, identify the additionality problem, and suggest what changes (if any) would make it a genuine impact investment.
+        </div>
+        <textarea class="practice-input" placeholder="Where this sits on the spectrum: [traditional/ESG/screening/sustainable/impact] because...&#10;&#10;The additionality problem: Since these are publicly listed companies, the investment...&#10;&#10;What would make this genuine impact investing: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'esgvimpact')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-esgvimpact"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Impact Thesis -->
+    <div class="fw-card" onclick="toggleCard(this, 'thesis-detail')" data-name="Developing an Impact Thesis" data-tags="impact thesis investment strategy fund mandate theory of change">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Investment Strategy</div>
+      <div class="fw-name">Developing an Impact Thesis</div>
+      <div class="fw-short">The single document that defines what an investor believes about how capital creates change — and where they'll deploy it.</div>
+      <div class="fw-tags"><span class="tag">Strategy</span><span class="tag">Mandate</span><span class="tag">Fund Design</span></div>
+    </div>
+    <div class="fw-detail" id="thesis-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>What an impact thesis defines</h4>
+          <ul>
+            <li><strong>Impact goal:</strong> The specific social/environmental outcome being pursued (often linked to SDGs)</li>
+            <li><strong>Target population/geography:</strong> Who benefits, and where</li>
+            <li><strong>Theory of change:</strong> How capital deployment leads to that outcome</li>
+            <li><strong>Asset class and stage:</strong> Equity, debt, blended; seed to growth to mature</li>
+            <li><strong>Return expectations:</strong> Market-rate, below-market, or capital preservation</li>
+            <li><strong>Risk appetite:</strong> What level of impact and financial risk is acceptable</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Building the thesis</h4>
+          <ol class="steps-list">
+            <li>Start with the impact problem, not the financial product — what change are you trying to create?</li>
+            <li>Map the capital gap — where is funding genuinely scarce relative to need? (additionality starts here)</li>
+            <li>Define your edge — why is your capital, expertise, or network the right fit for this gap?</li>
+            <li>Set explicit return and impact targets — both should be falsifiable, not aspirational platitudes</li>
+            <li>Pressure-test against alternative uses of the same capital — would another allocation create more impact or return?</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>The return-impact tension</h4>
+          <p>Most impact theses must take an explicit position on the relationship between financial return and impact: are they correlated (impact drives financial outperformance), in tension (some impact requires return concession), or genuinely uncorrelated? Vague answers here undermine investor trust.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Common thesis weaknesses</h4>
+          <ul>
+            <li>Too broad — "we invest in companies doing good" isn't a thesis, it's a mood</li>
+            <li>No clear theory of how the specific capital deployed causes the specific outcome</li>
+            <li>Confusing the fund's impact thesis with individual portfolio companies' theories of change</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> You're designing an impact thesis for a new $50M fund focused on improving financial inclusion for First Nations communities in regional Australia. Draft the core elements: impact goal, target population, theory of change (2-3 sentences), asset class/stage focus, and return expectations. Take an explicit position on the return-impact relationship.
+        </div>
+        <textarea class="practice-input" placeholder="Impact goal: ...&#10;Target population/geography: ...&#10;Theory of change: ...&#10;Asset class and stage: ...&#10;Return expectations: [market-rate/below-market/capital preservation] because...&#10;&#10;Position on return-impact relationship: I believe these are [correlated/in tension/uncorrelated] because..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'thesis')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-thesis"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Theory of Change (investor lens) -->
+    <div class="fw-card" onclick="toggleCard(this, 'tocinvestor-detail')" data-name="Theory of Change for Investors" data-tags="theory of change causal chain assumptions investment logic">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Investment Logic</div>
+      <div class="fw-name">Theory of Change (Investor Lens)</div>
+      <div class="fw-short">Not just a grantmaker's tool. For an investor, the Theory of Change is the causal spine underneath every impact thesis — and the thing due diligence is actually testing.</div>
+      <div class="fw-tags"><span class="tag">Causal Chain</span><span class="tag">Assumptions</span><span class="tag">Due Diligence Input</span></div>
+    </div>
+    <div class="fw-detail" id="tocinvestor-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>Why investors need this distinctly from programme designers</h4>
+          <p>A nonprofit's Theory of Change explains how a programme creates change. An investor's Theory of Change has an extra link the programme version doesn't need: it must also explain how the <em>capital itself</em> — not just the activities it funds — contributes to that change. This is the difference between "this programme helps people" and "this specific investment helps this programme help people, more than it otherwise would."</p>
+        </div>
+        <div class="detail-block">
+          <h4>The investor-specific causal chain</h4>
+          <ul>
+            <li><strong>Capital input:</strong> What does this specific cheque enable that wouldn't otherwise happen? (the additionality link)</li>
+            <li><strong>Enterprise activity:</strong> What the investee actually does with the capital</li>
+            <li><strong>Outcome:</strong> The change experienced by the target population</li>
+            <li><strong>Investor contribution:</strong> Separating the enterprise's theory of change from the investor's own — capital, governance, network, signalling</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Where this shows up across the investment lifecycle</h4>
+          <ol class="steps-list">
+            <li>At thesis stage: the fund's overall Theory of Change sets out why this asset class/sector/geography is the right place to deploy capital for impact</li>
+            <li>At due diligence: the enterprise's Theory of Change is tested for logical coherence — does each link actually follow from the one before it?</li>
+            <li>At monitoring: leading indicators are chosen specifically because they sit early in the causal chain, giving warning before lagging outcome data arrives</li>
+            <li>At exit: a sale that breaks the causal chain (e.g. to an acquirer who'll abandon the activity that drove the outcome) is a Theory of Change failure, not just a financial event</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>How this differs from the consulting-sector treatment</h4>
+          <p>The Consulting Playbook's Theory of Change entry is written from a programme design and evaluation lens — useful for NGOs and government services building and assessing their own programmes. This entry is written from the capital allocator's seat: the same underlying logic, but with the investor's own contribution made explicit as a distinct, testable link in the chain.</p>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> An impact fund is evaluating a $3M investment in a solar mini-grid company serving off-grid villages. Build the investor-specific Theory of Change — explicitly separate the enterprise's causal chain (capital → activity → outcome) from the investor's own contribution link, and identify the single weakest, most assumption-laden point in the chain.
+        </div>
+        <textarea class="practice-input" placeholder="Capital input: ...&#10;Enterprise activity: ...&#10;Outcome: ...&#10;&#10;Investor contribution (distinct from the enterprise's own theory of change): ...&#10;&#10;Weakest link in the chain: ... because..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'tocinvestor')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-tocinvestor"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Additionality -->
+    <div class="fw-card" onclick="toggleCard(this, 'additionality-detail')" data-name="Additionality" data-tags="additionality counterfactual causation capital impact attribution">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Core Concept</div>
+      <div class="fw-name">Additionality</div>
+      <div class="fw-short">Would this have happened anyway? The single hardest, most important question in impact investing.</div>
+      <div class="fw-tags"><span class="tag">Counterfactual</span><span class="tag">Causation</span><span class="tag">IFC</span></div>
+    </div>
+    <div class="fw-detail" id="additionality-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The four types of additionality</h4>
+          <ul>
+            <li><strong>Financial additionality:</strong> The capital wouldn't have been available from other sources (market gap)</li>
+            <li><strong>Value-add additionality:</strong> The investor provides more than capital — expertise, networks, governance that improves outcomes</li>
+            <li><strong>Signalling additionality:</strong> The investment signals credibility that crowds in other capital</li>
+            <li><strong>Demonstration additionality:</strong> Proves a model works, enabling replication elsewhere</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Why it's hard to prove</h4>
+          <p>True additionality requires knowing the counterfactual — what would have happened without this investment. Since you can't run the experiment twice, additionality is always an estimate, supported by reasoning (would another investor have funded this at the same terms and speed?) rather than certainty.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Practical assessment approach</h4>
+          <ol class="steps-list">
+            <li>Ask: is this a capital-constrained market, or would commercial capital have stepped in anyway?</li>
+            <li>Assess deal terms — is the investor accepting below-market terms (concessionary capital) that signal genuine market gap-filling?</li>
+            <li>Examine timing — would this company/project have happened later, smaller, or not at all without this capital?</li>
+            <li>Document the counterfactual reasoning explicitly, even if imperfect — silence on additionality is worse than an honest, imperfect estimate</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>The IFC's "but for" test</h4>
+          <ul>
+            <li>The International Finance Corporation uses a "but for" test: but for this investment, would the project have happened at all, at this scale, with this quality, or this speed?</li>
+            <li>Strongest additionality claims combine financial AND value-add additionality — capital plus genuine expertise/governance improvement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> An impact fund is considering a $5M investment in a profitable, well-established social enterprise that already has strong revenue and could likely raise capital from mainstream commercial investors at similar terms. Assess the additionality case for this investment using the "but for" test, and identify what would need to be true for this to be a genuinely additional investment.
+        </div>
+        <textarea class="practice-input" placeholder="Applying the 'but for' test: But for this investment, would the project happen at all/at this scale/speed/quality?&#10;&#10;My assessment: The additionality case here is [weak/moderate/strong] because...&#10;&#10;What would need to be true for genuine additionality: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'additionality')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-additionality"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+  </div><!-- /fw-grid cat-foundations -->
+
+
+  <!-- ═══════════════════════════════
+       SECTION 2: MEASUREMENT
+  ═══════════════════════════════ -->
+  <div class="section-header cat-measurement" data-cat="measurement">
+    <span class="section-label">Measurement</span>
+    <span class="section-title">Impact Measurement & Management</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fw-grid cat-measurement" data-cat="measurement">
+
+    <!-- Five Dimensions of Impact -->
+    <div class="fw-card" onclick="toggleCard(this, 'fivedim-detail')" data-name="Five Dimensions of Impact (IMP)" data-tags="IMP five dimensions what who how much contribution risk">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Global Standard</div>
+      <div class="fw-name">Five Dimensions of Impact (IMP)</div>
+      <div class="fw-short">What, Who, How Much, Contribution, Risk. The shared language for structuring any impact claim, from the Impact Management Project.</div>
+      <div class="fw-tags"><span class="tag">IMP Norms</span><span class="tag">Industry Standard</span><span class="tag">Structure</span></div>
+    </div>
+    <div class="fw-detail" id="fivedim-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The five dimensions</h4>
+          <div class="dimension-grid">
+            <div class="dimension-row"><span class="dimension-label">What</span>The outcome, whether positive/negative, and how important it is to those experiencing it</div>
+            <div class="dimension-row"><span class="dimension-label">Who</span>The stakeholders experiencing the outcome, and how underserved they are relative to the outcome</div>
+            <div class="dimension-row"><span class="dimension-label">How Much</span>Scale (how many), depth (degree of change), duration (how long it lasts)</div>
+            <div class="dimension-row"><span class="dimension-label">Contribution</span>Whether the outcome is better than what would likely have occurred otherwise (additionality)</div>
+            <div class="dimension-row"><span class="dimension-label">Risk</span>The likelihood that impact will differ from what's expected</div>
+          </div>
+        </div>
+        <div class="detail-block">
+          <h4>Background</h4>
+          <p>Developed through the Impact Management Project (2016–2021), a consensus-building effort across 2,000+ organisations. Since 2021, stewardship passed to Impact Frontiers. It's now the most widely referenced standard in impact investing — embedded in IRIS+, the IFC's Operating Principles for Impact Management, and most investor frameworks.</p>
+        </div>
+        <div class="detail-block">
+          <h4>How investors apply it</h4>
+          <ol class="steps-list">
+            <li>For each investment, profile the outcome across all five dimensions using a structured rubric (often 0–3 or 1–4 scoring)</li>
+            <li>"How Much" should always be quantified using specific metrics; "What," "Who," and "Risk" combine qualitative and quantitative evidence</li>
+            <li>"Contribution" should be supported by logically argued, ideally empirically tested, counterfactual reasoning</li>
+            <li>Investors add a sixth implicit dimension: their own contribution (was the capital itself additional, distinct from the enterprise's contribution)</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>IMP vs IRIS+: the key distinction</h4>
+          <ul>
+            <li>The Five Dimensions tell you <em>how to structure</em> an impact claim (the question architecture)</li>
+            <li>IRIS+ tells you <em>what to measure</em> (the indicator catalogue — 500+ standardised metrics across sectors)</li>
+            <li>Most practitioners use both together: profile outcomes using the Five Dimensions, then populate metrics from IRIS+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> An impact fund has invested in a microfinance company providing small business loans to women entrepreneurs in regional Indonesia. Profile this investment across all five IMP dimensions — for each, identify the specific evidence or metric you'd want to collect.
+        </div>
+        <textarea class="practice-input" placeholder="What: [outcome] — evidence/metric needed: ...&#10;Who: [stakeholders, underserved status] — evidence/metric needed: ...&#10;How Much: [scale/depth/duration] — evidence/metric needed: ...&#10;Contribution: [counterfactual reasoning] — evidence/metric needed: ...&#10;Risk: [what could undermine this impact] — evidence/metric needed: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'fivedim')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-fivedim"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- IRIS+ -->
+    <div class="fw-card" onclick="toggleCard(this, 'irisplus-detail')" data-name="IRIS+" data-tags="IRIS GIIN indicators metrics catalogue standardised measurement">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Indicator Catalogue</div>
+      <div class="fw-name">IRIS+</div>
+      <div class="fw-short">500+ standardised metrics across 17 sectors. The GIIN's answer to "what exactly should I measure?"</div>
+      <div class="fw-tags"><span class="tag">GIIN</span><span class="tag">Metrics</span><span class="tag">Comparability</span></div>
+    </div>
+    <div class="fw-detail" id="irisplus-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>What it provides</h4>
+          <ul>
+            <li>Standardised metrics across 17 sectors (agriculture, education, energy, financial inclusion, health, housing, etc.)</li>
+            <li>"Core Metrics Sets" — curated subsets of the most decision-useful indicators per theme, reducing the overwhelm of the full catalogue</li>
+            <li>Direct alignment to the Five Dimensions of Impact (IMP) and SDG targets</li>
+            <li>Evidence briefings explaining why specific metrics matter for specific outcomes</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>The selection discipline</h4>
+          <p>While IRIS+ offers 500+ metrics, most programmes need only 12–18 core metrics. Measuring everything creates measurement fatigue and dilutes focus. Selection should follow directly from the impact thesis — measure what validates your specific theory of change, not everything that's available.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Implementation approach</h4>
+          <ol class="steps-list">
+            <li>State the impact thesis explicitly before selecting metrics</li>
+            <li>Identify the outcome the thesis predicts</li>
+            <li>Select IRIS+ Core Metrics that directly validate that outcome</li>
+            <li>Add a small number of context metrics that explain variance (e.g. demographic breakdowns)</li>
+            <li>Resist the urge to add metrics "just in case" — each metric has a real data collection cost</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>The comparability value</h4>
+          <ul>
+            <li>Standardised metrics enable portfolio-level aggregation — comparing impact across very different investments</li>
+            <li>Enables co-investment and syndication — multiple investors can use the same data dictionary</li>
+            <li>Critical for LP reporting where capital comes from multiple sources with different reporting needs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A fund's impact thesis states: "We believe providing affordable solar energy to off-grid rural households improves educational outcomes by extending study hours after dark." Select 4-5 IRIS+-style metrics (you don't need exact IRIS+ codes — describe the metrics) that would directly validate this specific thesis, distinguishing core metrics from context metrics.
+        </div>
+        <textarea class="practice-input" placeholder="Core metrics (directly validate the thesis):&#10;1. ...&#10;2. ...&#10;3. ...&#10;&#10;Context metrics (explain variance):&#10;1. ...&#10;2. ...&#10;&#10;Metrics I'd deliberately exclude despite being 'interesting': ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'irisplus')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-irisplus"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Impact Risk Assessment -->
+    <div class="fw-card" onclick="toggleCard(this, 'impactrisk-detail')" data-name="Impact Risk Assessment" data-tags="impact risk evidence execution external durability drop-off">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Risk Management</div>
+      <div class="fw-name">Impact Risk Assessment</div>
+      <div class="fw-short">Financial risk has a whole discipline. Impact risk needs its own — the ways expected outcomes fail to materialise.</div>
+      <div class="fw-tags"><span class="tag">Risk Categories</span><span class="tag">Mitigation</span><span class="tag">IMP Risk</span></div>
+    </div>
+    <div class="fw-detail" id="impactrisk-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The impact risk categories</h4>
+          <ul>
+            <li><strong>Evidence risk:</strong> The assumption that the activity creates the outcome is wrong or untested</li>
+            <li><strong>Execution risk:</strong> The enterprise fails to deliver the activities as planned</li>
+            <li><strong>External risk:</strong> Outside factors (economic shocks, policy changes) disrupt the outcome</li>
+            <li><strong>Stakeholder participation risk:</strong> Intended beneficiaries don't engage or experience the outcome differently than expected</li>
+            <li><strong>Durability / drop-off risk:</strong> The outcome doesn't persist over time</li>
+            <li><strong>Unexpected impact risk:</strong> Negative or unintended consequences occur alongside the intended positive impact</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Risk scoring approach</h4>
+          <p>Practitioners typically rate each risk category by likelihood × consequence (similar to financial risk matrices), producing an overall impact risk rating per investment. This should happen at due diligence (ex ante) and be revisited through monitoring (ex post).</p>
+        </div>
+        <div class="detail-block">
+          <h4>Managing impact risk</h4>
+          <ol class="steps-list">
+            <li>Design stage: build measurement plans and mitigation strategies into the investment structure from day one</li>
+            <li>Due diligence: explicitly score each risk category, don't just assess financial risk</li>
+            <li>Monitoring: track leading indicators of risk materialising (e.g. declining engagement = stakeholder participation risk emerging)</li>
+            <li>Reporting: be transparent ex post about which risks materialised and how they were managed</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Why this matters for return</h4>
+          <ul>
+            <li>Impact risk and financial risk are often correlated — an enterprise failing to deliver impact is frequently also failing operationally</li>
+            <li>For impact-linked financial instruments (e.g. outcomes-based contracts), impact risk directly determines financial return</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> An impact fund is assessing a potential investment in a workforce training program for long-term unemployed people, designed to lead to stable employment. Identify and rate (High/Medium/Low) the risk in each of the six impact risk categories, and propose one mitigation for the two highest-rated risks.
+        </div>
+        <textarea class="practice-input" placeholder="Evidence risk: [H/M/L] because...&#10;Execution risk: [H/M/L] because...&#10;External risk: [H/M/L] because...&#10;Stakeholder participation risk: [H/M/L] because...&#10;Durability/drop-off risk: [H/M/L] because...&#10;Unexpected impact risk: [H/M/L] because...&#10;&#10;Mitigation for highest risk 1: ...&#10;Mitigation for highest risk 2: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'impactrisk')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-impactrisk"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+  </div><!-- /fw-grid cat-measurement -->
+
+
+  <!-- ═══════════════════════════════
+       SECTION 3: DEAL STRUCTURING
+  ═══════════════════════════════ -->
+  <div class="section-header cat-structuring" data-cat="structuring">
+    <span class="section-label">Deal Structuring</span>
+    <span class="section-title">Deal Structuring for Impact</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fw-grid cat-structuring" data-cat="structuring">
+
+    <!-- Blended Finance -->
+    <div class="fw-card" onclick="toggleCard(this, 'blendedfinance-detail')" data-name="Blended Finance" data-tags="blended finance catalytic capital first loss tranches concessional">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Capital Structure</div>
+      <div class="fw-name">Blended Finance</div>
+      <div class="fw-short">Using concessional public/philanthropic capital to de-risk and mobilise larger pools of commercial investment.</div>
+      <div class="fw-tags"><span class="tag">Catalytic Capital</span><span class="tag">Tranches</span><span class="tag">SIFI</span></div>
+    </div>
+    <div class="fw-detail" id="blendedfinance-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>What it is</h4>
+          <p>Blended finance is a structuring approach that uses capital from philanthropic or public sources to catalyse commercial investment, increasing the total pool of capital available for development outcomes. It's not a single instrument — it's an approach to combining different capital types with different risk/return expectations in the same structure.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Common structures</h4>
+          <ul>
+            <li><strong>First-loss tranche:</strong> Concessional capital absorbs initial losses, protecting commercial investors and reducing their effective risk</li>
+            <li><strong>Guarantees:</strong> Public/philanthropic capital guarantees a portion of commercial losses without committing capital upfront</li>
+            <li><strong>Technical assistance facilities:</strong> Grant funding pairs with investment capital to build investee capacity, improving investment success odds</li>
+            <li><strong>Results-based / outcomes payments:</strong> Returns to certain capital providers depend on achieving pre-defined impact outcomes</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Why it works</h4>
+          <ol class="steps-list">
+            <li>Commercial investors get risk-adjusted returns close to market rate, despite investing in higher-risk-perceived markets/sectors</li>
+            <li>Public/philanthropic capital achieves greater leverage — a small amount of concessional capital can unlock much larger commercial pools</li>
+            <li>The structure makes explicit who bears which risk, rather than asking all capital to accept the same risk-return profile</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Risks and criticisms</h4>
+          <ul>
+            <li>Can subsidise deals that would have attracted commercial capital anyway — undermines additionality</li>
+            <li>Complexity of structuring can consume a significant share of total capital in transaction costs</li>
+            <li>Risk that concessional capital props up structurally unviable projects rather than genuinely catalysing scale</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A $20M fund wants to finance smallholder farmer cooperatives in Southeast Asia, a sector commercial investors view as too risky. Design a basic blended finance structure — identify what role concessional capital would play, what role commercial capital would play, and what specific structure (first-loss, guarantee, etc.) you'd recommend and why.
+        </div>
+        <textarea class="practice-input" placeholder="Concessional capital role: ...&#10;Commercial capital role: ...&#10;&#10;Recommended structure: [first-loss tranche / guarantee / TA facility / outcomes-based] because...&#10;&#10;Approximate capital split (concessional vs commercial): ...&#10;&#10;Biggest risk in this structure: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'blendedfinance')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-blendedfinance"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Social Impact Bonds -->
+    <div class="fw-card" onclick="toggleCard(this, 'sib-detail')" data-name="Social Impact Bonds" data-tags="social impact bonds outcomes-based contracting pay for success">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Outcomes-Based Finance</div>
+      <div class="fw-name">Social Impact Bonds (SIBs)</div>
+      <div class="fw-short">Government pays only if outcomes are achieved. Investors fund the program upfront and bear the performance risk.</div>
+      <div class="fw-tags"><span class="tag">Pay-for-Success</span><span class="tag">Government</span><span class="tag">Outcomes</span></div>
+    </div>
+    <div class="fw-detail" id="sib-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>How a SIB works</h4>
+          <ol class="steps-list">
+            <li>Government/commissioner identifies a social outcome it wants to fund (e.g. reduced recidivism, reduced homelessness)</li>
+            <li>Private/impact investors provide upfront capital to a service provider to deliver the intervention</li>
+            <li>An independent evaluator measures whether the agreed outcomes were achieved</li>
+            <li>Government repays investors (with return) only if outcomes are achieved — the more successful, the higher the return</li>
+            <li>If outcomes fail, investors lose some or all of their capital — performance risk is transferred from government to investor</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>The structural logic</h4>
+          <p>SIBs align financial return directly with impact achievement — investors are only paid for genuine outcomes, not just for delivering activities. This shifts government procurement from paying for inputs/outputs to paying for outcomes, and transfers implementation risk to investors who are motivated to ensure delivery quality.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Key design elements</h4>
+          <ul>
+            <li><strong>Outcome metric:</strong> Must be clearly defined, measurable, and attributable to the intervention</li>
+            <li><strong>Independent evaluation:</strong> Critical for credibility — evaluator must be free of conflicts of interest</li>
+            <li><strong>Payment schedule:</strong> Often tiered — partial payment for partial success, bonus for exceeding targets</li>
+            <li><strong>Counterfactual/comparison group:</strong> Needed to attribute outcomes to the intervention rather than general trends</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Criticisms and limitations</h4>
+          <ul>
+            <li>High transaction costs relative to capital deployed — SIBs are expensive and slow to structure</li>
+            <li>Risk of "cherry-picking" easier-to-help beneficiaries to hit outcome targets, leaving harder cases underserved</li>
+            <li>Outcome metrics can be gamed or may not capture the full value of the intervention</li>
+            <li>Government must have a sophisticated enough commissioning capability to design and oversee SIBs well</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A state government wants to design a Social Impact Bond to reduce youth reoffending rates. Design the core SIB structure: define a specific, measurable outcome metric, propose a payment schedule logic, and identify the single biggest design risk that could undermine this SIB's credibility or effectiveness.
+        </div>
+        <textarea class="practice-input" placeholder="Outcome metric: [specific and measurable] e.g. ...&#10;&#10;Payment schedule logic: [e.g. tiered payments based on % reduction in reoffending vs comparison group]&#10;&#10;Biggest design risk: ... because..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'sib')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-sib"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Capital Stack / Instrument Selection -->
+    <div class="fw-card" onclick="toggleCard(this, 'capitalstack-detail')" data-name="Capital Stack & Instrument Selection" data-tags="equity debt quasi-equity revenue-based financing capital stack instruments">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Instrument Design</div>
+      <div class="fw-name">Capital Stack & Instrument Selection</div>
+      <div class="fw-short">Equity isn't always right for impact. Matching the financial instrument to the enterprise's actual growth profile and mission.</div>
+      <div class="fw-tags"><span class="tag">Equity</span><span class="tag">Debt</span><span class="tag">Revenue-Based</span></div>
+    </div>
+    <div class="fw-detail" id="capitalstack-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The instrument options</h4>
+          <ul>
+            <li><strong>Equity:</strong> Highest risk/return, full upside participation, but dilutes founder/mission control — best for high-growth, scalable models</li>
+            <li><strong>Debt:</strong> Lower risk, fixed return, doesn't dilute ownership, but requires predictable cash flow to service — suits established revenue models</li>
+            <li><strong>Quasi-equity / mezzanine:</strong> Hybrid instruments (convertible notes, revenue participation rights) — flexible, often used when traditional equity or debt don't fit</li>
+            <li><strong>Revenue-based financing:</strong> Repayment as a percentage of revenue — aligns investor return with actual performance, useful for cash-flow-positive but non-traditional growth businesses</li>
+            <li><strong>Grants / recoverable grants:</strong> No expectation of market return — appropriate for very early-stage or deeply mission-locked models</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Matching instrument to enterprise type</h4>
+          <p>Many social enterprises have steady, modest cash flows rather than the hockey-stick growth venture equity expects. Forcing equity-style instruments onto these models creates misaligned incentives (pressure to grow fast at the expense of mission) or simply doesn't fit their economics. The instrument should follow the business model, not the other way around.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Mission protection mechanisms</h4>
+          <ol class="steps-list">
+            <li>Golden shares or special voting rights that protect mission-critical decisions regardless of ownership dilution</li>
+            <li>Mission lock provisions in legal structure (e.g. steward-ownership, B-corp certification requirements written into governance)</li>
+            <li>Impact-linked terms — interest rates or equity terms that adjust based on impact performance, not just financial performance</li>
+            <li>Board composition requirements ensuring mission-aligned representation regardless of cap table</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Practical decision framework</h4>
+          <ul>
+            <li>Is the growth trajectory scalable and venture-like, or steady and cash-generative? → equity vs debt/revenue-based</li>
+            <li>How important is founder/mission control preservation? → consider quasi-equity or mission-lock mechanisms</li>
+            <li>What stage is the enterprise at? → grants/recoverable grants for very early stage, equity/debt as it matures</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A community-owned renewable energy cooperative generates steady, predictable revenue from energy sales but has modest growth potential (not venture-scale). They need $2M in capital to expand to a second site. Recommend the most appropriate financial instrument, justify your choice against the alternatives, and suggest one mission protection mechanism if relevant.
+        </div>
+        <textarea class="practice-input" placeholder="Recommended instrument: [equity/debt/quasi-equity/revenue-based/grant] because...&#10;&#10;Why this is better than equity specifically: ...&#10;&#10;Why this is better than pure debt specifically: ...&#10;&#10;Mission protection mechanism (if relevant): ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'capitalstack')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-capitalstack"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+  </div><!-- /fw-grid cat-structuring -->
+
+
+  <!-- ═══════════════════════════════
+       SECTION 4: PORTFOLIO & FUND
+  ═══════════════════════════════ -->
+  <div class="section-header cat-portfolio" data-cat="portfolio">
+    <span class="section-label">Portfolio & Fund</span>
+    <span class="section-title">Portfolio Construction & Fund Management</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fw-grid cat-portfolio" data-cat="portfolio">
+
+    <!-- Portfolio Construction -->
+    <div class="fw-card" onclick="toggleCard(this, 'portfolioconstruction-detail')" data-name="Impact Portfolio Construction" data-tags="portfolio construction diversification concentration impact fund strategy">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Fund Strategy</div>
+      <div class="fw-name">Impact Portfolio Construction</div>
+      <div class="fw-short">Diversification vs concentration, financial risk vs impact risk — building a portfolio that delivers on both mandates.</div>
+      <div class="fw-tags"><span class="tag">Diversification</span><span class="tag">Fund Design</span><span class="tag">Risk Balance</span></div>
+    </div>
+    <div class="fw-detail" id="portfolioconstruction-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The dual mandate complexity</h4>
+          <p>Traditional portfolio construction optimises for risk-adjusted financial return. Impact portfolios must simultaneously manage a second, often imperfectly correlated objective: aggregate impact achievement. A portfolio optimised purely for return may underweight high-impact, higher-risk investments; one optimised purely for impact may take on excessive financial risk.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Diversification dimensions for impact portfolios</h4>
+          <ul>
+            <li><strong>Financial risk:</strong> Stage, sector, geography (standard portfolio theory)</li>
+            <li><strong>Impact theme:</strong> Spreading across multiple impact areas vs concentrating in one theme for deeper expertise and influence</li>
+            <li><strong>Impact risk profile:</strong> Balancing higher-evidence, lower-impact-risk investments against unproven, higher-potential models</li>
+            <li><strong>Return expectation:</strong> Blending market-rate and below-market (concessionary) investments within the same portfolio if the mandate allows</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Construction approach</h4>
+          <ol class="steps-list">
+            <li>Define portfolio-level impact and return targets first — these should flow from the fund's impact thesis</li>
+            <li>Set position sizing rules that account for both financial and impact risk, not just financial risk alone</li>
+            <li>Decide on thematic concentration vs diversification based on the fund's stated expertise and theory of change</li>
+            <li>Build a barbell if appropriate: a core of lower-risk, evidence-backed investments plus a smaller allocation to higher-risk, potentially higher-impact bets</li>
+            <li>Stress-test the portfolio against both financial downside scenarios and impact underperformance scenarios</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Common portfolio construction errors</h4>
+          <ul>
+            <li>Treating impact and financial risk as independent when they're often correlated</li>
+            <li>Over-diversifying across impact themes, diluting expertise and making meaningful impact measurement harder</li>
+            <li>Failing to set explicit rules for how impact underperformance affects future allocation decisions within the fund</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> You're constructing a $30M impact fund focused on affordable housing solutions. You're deciding between a concentrated strategy (10-12 investments, deep expertise in one geography) or a diversified strategy (25-30 smaller investments across multiple regions and housing sub-themes). Recommend a strategy and justify it against both the financial risk and impact achievement dimensions.
+        </div>
+        <textarea class="practice-input" placeholder="Recommended strategy: [concentrated/diversified] because...&#10;&#10;Financial risk implications: ...&#10;&#10;Impact achievement implications: ...&#10;&#10;Position sizing approach: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'portfolioconstruction')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-portfolioconstruction"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Operating Principles for Impact Management -->
+    <div class="fw-card" onclick="toggleCard(this, 'opim-detail')" data-name="Operating Principles for Impact Management" data-tags="OPIM IFC governance fund signatory accountability">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Governance Standard</div>
+      <div class="fw-name">Operating Principles for Impact Management (OPIM)</div>
+      <div class="fw-short">The IFC-developed standard that defines what it actually means to manage a fund "for impact" across its full lifecycle.</div>
+      <div class="fw-tags"><span class="tag">IFC</span><span class="tag">Fund Governance</span><span class="tag">Signatory Standard</span></div>
+    </div>
+    <div class="fw-detail" id="opim-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>What OPIM is</h4>
+          <p>Developed by the IFC in 2019 with industry consultation, OPIM is a set of principles that funds and institutions can become signatories to, establishing a common discipline for managing investments for impact across the full investment lifecycle — strategy, origination, structuring, portfolio management, exit, and independent verification.</p>
+        </div>
+        <div class="detail-block">
+          <h4>The core principle areas</h4>
+          <ul>
+            <li><strong>Strategic intent:</strong> Define strategic impact objective(s) consistent with the investment strategy</li>
+            <li><strong>Portfolio management:</strong> Manage the investment portfolio with reference to the achievement of impact, not just financial return</li>
+            <li><strong>Pre-investment assessment:</strong> Assess expected impact at the screening/structuring stage, using a systematic approach</li>
+            <li><strong>Monitoring:</strong> Monitor the progress of each investment against expected impact through investment holding period</li>
+            <li><strong>Exit:</strong> Conduct exits considering the effect on sustained impact</li>
+            <li><strong>Independent verification:</strong> Publicly disclose alignment with the Principles and obtain independent verification</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Why signatory status matters</h4>
+          <ol class="steps-list">
+            <li>Signals credibility to LPs concerned about impact washing</li>
+            <li>Requires genuine accountability — independent verification means claims can be checked</li>
+            <li>Increasingly expected by major institutional LPs (DFIs, pension funds) as a baseline credibility marker</li>
+            <li>Creates internal discipline — forces a fund to build impact management into operations, not bolt it on as marketing</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Practical implementation</h4>
+          <ul>
+            <li>Requires building impact assessment into deal screening, not just post-investment reporting</li>
+            <li>Exit decisions must explicitly consider impact continuity — a financially attractive exit that destroys impact (e.g. selling to a less mission-aligned acquirer) requires careful navigation</li>
+            <li>Independent verification typically occurs every 2 years, adding both credibility and operational overhead</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A fund following OPIM principles is considering an exit opportunity: selling a portfolio company (a sustainable agriculture business serving smallholder farmers) to a large multinational agribusiness at a strong financial return, but the acquirer has a track record of consolidating and reducing smallholder engagement post-acquisition. Apply the OPIM exit principle — how should the fund approach this decision?
+        </div>
+        <textarea class="practice-input" placeholder="Key tension: Strong financial return vs likely impact discontinuity post-exit&#10;&#10;How OPIM's exit principle should shape this decision: ...&#10;&#10;Possible mitigations or alternative approaches: ...&#10;&#10;My recommendation: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'opim')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-opim"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+  </div><!-- /fw-grid cat-portfolio -->
+
+
+  <!-- ═══════════════════════════════
+       SECTION 5: DUE DILIGENCE
+  ═══════════════════════════════ -->
+  <div class="section-header cat-duediligence" data-cat="duediligence">
+    <span class="section-label">Due Diligence</span>
+    <span class="section-title">Impact Due Diligence</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fw-grid cat-duediligence" data-cat="duediligence">
+
+    <!-- Impact Due Diligence Process -->
+    <div class="fw-card" onclick="toggleCard(this, 'impactdd-detail')" data-name="Impact Due Diligence Process" data-tags="due diligence screening assessment investment process evaluation">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Investment Process</div>
+      <div class="fw-name">Impact Due Diligence Process</div>
+      <div class="fw-short">Financial DD has decades of standard practice. Impact DD is younger — here's the structured approach that's emerged.</div>
+      <div class="fw-tags"><span class="tag">Screening</span><span class="tag">Assessment</span><span class="tag">Process</span></div>
+    </div>
+    <div class="fw-detail" id="impactdd-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The impact DD process stages</h4>
+          <ol class="steps-list">
+            <li><strong>Impact screening:</strong> Does this investment align with the fund's impact thesis at all? (fast filter, eliminates obvious mismatches)</li>
+            <li><strong>Theory of change validation:</strong> Is the enterprise's theory of change logically sound and evidence-based?</li>
+            <li><strong>Impact measurement system assessment:</strong> Does the enterprise already track meaningful impact data, or would this need building?</li>
+            <li><strong>Five Dimensions profiling:</strong> Structured assessment of What/Who/How Much/Contribution/Risk</li>
+            <li><strong>Additionality assessment:</strong> Apply the "but for" test — would this happen without the investment?</li>
+            <li><strong>Unintended consequence scan:</strong> What negative or unexpected impacts might arise?</li>
+            <li><strong>Impact risk scoring:</strong> Rate across the standard risk categories (evidence, execution, external, etc.)</li>
+            <li><strong>Impact terms negotiation:</strong> Build measurement requirements, reporting cadence, and impact covenants into deal terms</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>Common impact DD failures</h4>
+          <ul>
+            <li>Treating impact DD as a checkbox exercise run in parallel by a junior team member, disconnected from the core investment decision</li>
+            <li>Accepting enterprise-provided impact claims without independent verification</li>
+            <li>Skipping the unintended consequence scan — most impact failures come from unconsidered negative externalities, not from failing the intended outcome</li>
+            <li>No clear process for what happens if impact DD reveals concerns — does it actually affect the investment decision, or just get noted?</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Integrating with financial DD</h4>
+          <ul>
+                <li>Impact and financial DD should happen in parallel, with findings cross-referenced — operational red flags often show up in both</li>
+            <li>Impact DD findings should explicitly feed into valuation and deal terms, not exist as a separate report nobody reads</li>
+            <li>The investment committee memo should integrate impact findings into the core recommendation, not append them as a separate section</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Resourcing impact DD properly</h4>
+          <ul>
+            <li>Requires genuine sector/impact expertise — not just generalist financial analysts asked to "also check the impact box"</li>
+            <li>Site visits and direct beneficiary engagement (where feasible) provide signal that documents alone cannot</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> You're conducting impact due diligence on a potential investment in an edtech company providing low-cost tutoring to disadvantaged students via an app. Walk through the impact DD process — for the Theory of Change validation and Unintended consequence scan stages specifically, identify the key questions you'd investigate.
+        </div>
+        <textarea class="practice-input" placeholder="Theory of Change validation — key questions:&#10;1. ...&#10;2. ...&#10;3. ...&#10;&#10;Unintended consequence scan — key questions:&#10;1. ...&#10;2. ...&#10;3. ...&#10;&#10;Red flags that would most concern me: ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'impactdd')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-impactdd"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+    <!-- Impact-Washing Red Flags -->
+    <div class="fw-card" onclick="toggleCard(this, 'redflags-detail')" data-name="Impact-Washing Red Flags" data-tags="impact washing greenwashing red flags credibility assessment">
+      <span class="fw-arrow">›</span>
+      <div class="fw-type">Risk Screening</div>
+      <div class="fw-name">Impact-Washing Red Flags</div>
+      <div class="fw-short">A practical checklist for spotting impact claims that won't survive scrutiny — before you commit capital or reputation.</div>
+      <div class="fw-tags"><span class="tag">Credibility</span><span class="tag">Screening</span><span class="tag">Reputation Risk</span></div>
+    </div>
+    <div class="fw-detail" id="redflags-detail">
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h4>The classic red flags</h4>
+          <ul>
+            <li><strong>Vague impact language:</strong> "Making the world better" with no specific, measurable outcome defined</li>
+            <li><strong>No baseline data:</strong> Impact claims with no "before" state to compare against — change can't be demonstrated without one</li>
+            <li><strong>Output-outcome confusion:</strong> Claiming impact based on activity counts (people reached) rather than actual outcome change</li>
+            <li><strong>Cherry-picked metrics:</strong> Reporting only favourable indicators while ignoring metrics that would show a fuller picture</li>
+            <li><strong>No counterfactual reasoning:</strong> No attempt to address whether the outcome would have happened anyway</li>
+            <li><strong>Impact claims disconnected from business model:</strong> The core revenue-generating activity doesn't actually drive the claimed impact</li>
+          </ul>
+        </div>
+        <div class="detail-block">
+          <h4>Structural red flags in a fund/enterprise</h4>
+          <ol class="steps-list">
+            <li>No dedicated impact measurement resourcing — impact is "everyone's job," meaning effectively no one's</li>
+            <li>Impact reporting that's inconsistent year to year, making it impossible to track genuine trends</li>
+            <li>Impact metrics that conveniently always show improvement, with no honest reporting of underperformance</li>
+            <li>Marketing materials with much stronger impact claims than internal reporting or due diligence documents support</li>
+          </ol>
+        </div>
+        <div class="detail-block">
+          <h4>The "so what" test</h4>
+          <p>For any impact claim, ask: if this metric improved, would anyone's life actually be meaningfully better? "10,000 app downloads" fails this test on its own — downloads aren't outcomes. "10,000 people who completed the program reported improved financial literacy scores, sustained at 6-month follow-up" passes.</p>
+        </div>
+        <div class="detail-block">
+          <h4>Due diligence questions to ask</h4>
+          <ul>
+            <li>"Walk me through exactly how this business activity creates this specific outcome" — vague or circular answers are a red flag</li>
+            <li>"What would happen to your impact metrics if we removed funding tomorrow?" — tests genuine additionality understanding</li>
+            <li>"What's your worst-performing impact metric, and why?" — tests honesty and measurement maturity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice-section">
+        <div class="practice-header"><span class="practice-badge">Practice Mode</span><h4>Apply the framework</h4></div>
+        <div class="practice-scenario">
+          <strong>Scenario:</strong> A fundraising deck for a "climate impact fund" states: "We've enabled $500M in clean energy projects and reached 2 million people with our portfolio companies' products." Apply the red flags checklist and the "so what" test to this claim — identify what's missing and what questions you'd ask in due diligence to get to genuine impact evidence.
+        </div>
+        <textarea class="practice-input" placeholder="Red flags identified in this claim:&#10;1. ...&#10;2. ...&#10;3. ...&#10;&#10;Applying the 'so what' test: This claim [passes/fails] because...&#10;&#10;Due diligence questions I'd ask:&#10;1. ...&#10;2. ...&#10;3. ..."></textarea>
+        <button class="practice-btn" onclick="getAIFeedback(this, 'redflags')">Get AI Feedback ›</button>
+        <div class="ai-response" id="ai-resp-redflags"><div class="ai-response-label">AI Coach Feedback</div><div class="ai-resp-content"></div></div>
+      </div>
+    </div>
+
+  </div><!-- /fw-grid cat-duediligence -->
+
+  <div class="section-divider"></div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>A living notebook. Last updated June 2026 · Part of a series alongside the Consulting Playbook and Health Commercialisation & Innovation Playbook · <a href="https://github.com/bwtwong" target="_blank">GitHub ↗</a></p>
+  <p style="margin-top:0.5rem; font-size:0.72rem; opacity:0.6">AI practice feedback powered by Claude (Anthropic) · Frameworks drawn from the Impact Management Project/Impact Frontiers, the GIIN, IFC Operating Principles for Impact Management, and impact investing practice · This is a practitioner's notebook, not investment or legal advice</p>
+</footer>
+
+<script>
+function toggleCard(card, detailId) {
+  const detail = document.getElementById(detailId);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.fw-card.open').forEach(c => {
+    c.classList.remove('open');
+    c.setAttribute('aria-expanded', 'false');
+  });
+  document.querySelectorAll('.fw-detail.open').forEach(d => d.classList.remove('open'));
+  if (!isOpen) {
+    card.classList.add('open');
+    card.setAttribute('aria-expanded', 'true');
+    detail.classList.add('open');
+    setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.fw-card').forEach(card => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-expanded', 'false');
+    const nameEl = card.querySelector('.fw-name');
+    if (nameEl) card.setAttribute('aria-label', `${nameEl.textContent.trim()} — expand details`);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+});
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const sections = document.querySelectorAll('.section-header, .fw-grid');
+  sections.forEach(el => {
+    if (cat === 'all') {
+      el.classList.remove('hidden');
+    } else {
+      el.classList.toggle('hidden', el.dataset.cat !== cat);
+    }
+  });
+  document.querySelectorAll('.fw-card.open').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.fw-detail.open').forEach(d => d.classList.remove('open'));
+}
+
+function searchFrameworks(query) {
+  const q = query.toLowerCase().trim();
+  if (q) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section-header, .fw-grid').forEach(el => el.classList.remove('hidden'));
+  }
+  document.querySelectorAll('.fw-card').forEach(card => {
+    if (!q) { card.classList.remove('hidden'); return; }
+    const name = (card.dataset.name || '').toLowerCase();
+    const tags = (card.dataset.tags || '').toLowerCase();
+    const text = (card.innerText || '').toLowerCase();
+    card.classList.toggle('hidden', !name.includes(q) && !tags.includes(q) && !text.includes(q));
+  });
+}
+
+const frameworkContexts = {
+  esgvimpact: "You are an impact investing strategist reviewing an analysis of a publicly-listed renewable energy screening fund marketed as 'impact.' Assess: (1) Is the spectrum placement correct — public equity negative/positive screening sits closer to sustainable/thematic investing, not genuine impact investing? (2) Is the additionality problem correctly identified — buying shares of already-public, already-funded companies typically provides little to no additional capital? (3) Are the suggested changes (e.g. private market allocation, primary capital, engagement/stewardship strategy) genuinely sufficient to close the gap? Under 280 words.",
+  thesis: "You are a fund strategy advisor reviewing a draft impact thesis for a $50M financial inclusion fund for First Nations communities. Assess: (1) Is the impact goal specific and falsifiable, not vague? (2) Is the theory of change logically coherent — does it explain the causal mechanism, not just state an aspiration? (3) Is the explicit position on the return-impact relationship well-reasoned and consistent with the asset class/stage choice? (4) Are there any internal inconsistencies (e.g. below-market return expectations paired with reasoning that suggests market-rate is achievable)? Under 280 words.",
+  tocinvestor: "You are an impact investing methodologist reviewing an investor-specific Theory of Change for a $3M solar mini-grid investment. Assess: (1) Is the enterprise's causal chain (capital → activity → outcome) logically coherent and specific to off-grid solar, not generic? (2) Is the investor's own contribution genuinely separated from the enterprise's theory of change — does it explain what THIS capital specifically enables, not just restate the enterprise's activities? (3) Is the identified weakest link actually the most assumption-laden point, or did the response pick an easier, less consequential link to critique? Under 280 words.",
+  additionality: "You are an impact due diligence specialist reviewing an additionality assessment for a $5M investment in an already-profitable, bankable social enterprise. Assess: (1) Is the 'but for' test correctly applied — is the conclusion that additionality is weak well-justified given the enterprise could likely access commercial capital? (2) Does the response correctly identify that value-add additionality (not just financial) could still justify the investment? (3) Are the conditions for genuine additionality specific and realistic (e.g. below-market terms, governance value-add, mission-lock provisions)? Under 280 words.",
+  fivedim: "You are an IMP framework specialist reviewing a Five Dimensions profiling exercise for a microfinance investment in regional Indonesia. Assess: (1) Is each dimension correctly understood — particularly the distinction between 'How Much' (scale/depth/duration) and 'Contribution' (counterfactual)? (2) Are the proposed metrics for each dimension genuinely fit for purpose, not generic? (3) Is the 'Who' dimension addressing underservedness specifically, not just demographic description? (4) Is 'Risk' addressing genuine threats to impact persistence, not just generic business risk? Under 280 words.",
+  irisplus: "You are a GIIN/IRIS+ metrics specialist reviewing a metric selection exercise for a solar energy/education impact thesis. Assess: (1) Do the core metrics genuinely validate the stated causal thesis (solar access → extended study hours → educational outcomes), or do they measure something adjacent but not the actual claim? (2) Are context metrics appropriately distinguished from core metrics? (3) Is the metric selection disciplined (12-18 range guidance) or does it sprawl unnecessarily? (4) Is the excluded-metrics reasoning sound? Under 280 words.",
+  impactrisk: "You are an impact risk specialist reviewing a six-category impact risk assessment for a workforce training program investment. Assess: (1) Are the risk ratings (H/M/L) reasonable given the program type — e.g. stakeholder participation risk and durability/drop-off risk are often particularly high for employment programs? (2) Are the reasons given for each rating specific to this context, not generic? (3) Are the two mitigation proposals genuinely addressing the root cause of the highest risks, not just surface-level fixes? Under 280 words.",
+  blendedfinance: "You are a blended finance structuring specialist reviewing a proposed structure for a $20M smallholder farmer cooperative fund. Assess: (1) Is the recommended structure (first-loss, guarantee, TA facility, or outcomes-based) well-matched to the stated risk perception problem? (2) Is the capital split between concessional and commercial reasonable for a first-loss structure in this context? (3) Is the identified biggest risk (e.g. subsidising deals that would happen anyway, or insufficient de-risking to actually attract commercial capital) the most important one? Under 280 words.",
+  sib: "You are a Social Impact Bond design specialist reviewing a proposed SIB structure for youth reoffending reduction. Assess: (1) Is the outcome metric specific, measurable, and genuinely attributable to an intervention (not just a vague aspiration)? (2) Is the payment schedule logic sound — does it create the right incentives without encouraging cherry-picking easier cases? (3) Is the identified biggest design risk (e.g. cherry-picking, evaluation independence, counterfactual attribution) well-reasoned and the most significant one for this context? Under 280 words.",
+  capitalstack: "You are a social finance instrument specialist reviewing an instrument recommendation for a community-owned renewable energy cooperative needing $2M growth capital. Assess: (1) Is the recommendation (likely debt or revenue-based financing, not equity) well-justified given the steady-but-modest growth profile described? (2) Is the comparison against equity and pure debt alternatives logically sound? (3) Is the mission protection mechanism (if proposed) appropriate for a cooperative structure specifically? Under 280 words.",
+  portfolioconstruction: "You are a fund portfolio construction advisor reviewing a concentrated vs diversified strategy recommendation for a $30M affordable housing fund. Assess: (1) Is the strategic recommendation well-justified against both financial risk and impact achievement dimensions, not just one? (2) Does the response correctly recognise the trade-off between deep expertise/influence (concentration) and risk diversification/broader reach (diversification)? (3) Is the position sizing approach coherent with the chosen strategy? Under 280 words.",
+  opim: "You are an OPIM (Operating Principles for Impact Management) compliance advisor reviewing an exit decision involving a financially attractive but impact-risky acquirer for a sustainable agriculture portfolio company. Assess: (1) Does the response correctly apply OPIM's exit principle, which requires considering effect on sustained impact, not just financial return? (2) Are the proposed mitigations (e.g. impact covenants in the sale agreement, seeking alternative buyers, phased exit) realistic and meaningful? (3) Is the final recommendation appropriately balanced rather than dismissing financial considerations entirely? Under 280 words.",
+  impactdd: "You are an impact due diligence training specialist reviewing a due diligence question set for an edtech tutoring app investment. Assess: (1) Are the Theory of Change validation questions genuinely probing the causal logic (e.g. does app usage actually correlate with learning outcomes, or just engagement)? (2) Are the unintended consequence questions specific to this context — e.g. screen time concerns, widening the digital divide for those without device/data access, teacher displacement? (3) Are the identified red flags the most important ones for this specific business model? Under 280 words.",
+  redflags: "You are an impact-washing detection specialist reviewing an assessment of a climate fund's marketing claim ('$500M enabled, 2 million people reached'). Assess: (1) Are the identified red flags accurate — particularly the output-vs-outcome confusion (people 'reached' isn't an outcome) and lack of additionality/counterfactual reasoning? (2) Is the 'so what' test correctly applied to conclude this claim likely fails without more specificity? (3) Are the proposed due diligence questions sharp enough to actually surface whether genuine impact occurred? Under 280 words."
+};
+
+async function getAIFeedback(btn, frameworkId) {
+  const section = btn.closest('.practice-section');
+  const textarea = section.querySelector('.practice-input');
+  const responseDiv = section.querySelector('.ai-response');
+  const contentDiv = section.querySelector('.ai-resp-content');
+
+  const userAnswer = textarea.value.trim();
+  if (!userAnswer || userAnswer.length < 20) {
+    textarea.style.borderColor = '#E07A7A';
+    setTimeout(() => textarea.style.borderColor = '', 2000);
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Analysing...';
+  responseDiv.classList.remove('visible');
+
+  try {
+    const systemPrompt = frameworkContexts[frameworkId] || "You are an impact investing coach giving feedback on a practitioner's framework application. Be specific, encouraging, and rigorous. Under 280 words.";
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: "user", content: `Here is my response to the practice scenario:\n\n${userAnswer}` }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || "Unable to generate feedback. Please try again.";
+
+    contentDiv.innerHTML = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>');
+
+    responseDiv.classList.add('visible');
+  } catch (err) {
+    contentDiv.innerHTML = '<p style="color:#E07A7A">Could not connect to AI feedback. Please check your connection and try again.</p>';
+    responseDiv.classList.add('visible');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Get AI Feedback ›';
+  }
+}
+</script>
+</body>
+</html>
